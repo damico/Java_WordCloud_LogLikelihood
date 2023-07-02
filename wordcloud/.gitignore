@@ -1,0 +1,9 @@
+/target/*
+wordcloud/target/*
+*.class
+/target/*
+wordcloud/target/*
+target/*
+wordcloud/target/*
+/target/
+target/

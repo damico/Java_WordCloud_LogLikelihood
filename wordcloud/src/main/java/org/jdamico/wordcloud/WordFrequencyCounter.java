@@ -69,8 +69,8 @@ public class WordFrequencyCounter {
 				text = line.toString();
 
 				text = text.replaceAll("\\s+", " "); // remove leading, trailing
-														// and in between extra
-														// spaces.
+				// and in between extra
+				// spaces.
 
 				wordCount += CorpusSize.getCorpusSize(text);
 
@@ -91,5 +91,28 @@ public class WordFrequencyCounter {
 		return new WordStats(wordFreq, wordCount);
 
 	}
+
+	public static WordStats countWordFreq(String word, String text) throws IOException {
+
+		int wordFreq = 0;
+		int wordCount = 0;
+
+		text = text.replaceAll("\\s+", " "); // remove leading, trailing
+		// and in between extra
+		// spaces.
+
+		wordCount += CorpusSize.getCorpusSize(text);
+
+		Pattern pattern = Pattern.compile("\\b(" + word.toLowerCase() + ")\\b");
+		Matcher matcher = pattern.matcher(text.toLowerCase().trim());
+
+		while (matcher.find()) {
+			++wordFreq;
+		}
+
+		return new WordStats(wordFreq, wordCount);
+
+	}
+
 
 }

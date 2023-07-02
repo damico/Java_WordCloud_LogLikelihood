@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -138,8 +139,10 @@ public class WordCloudMaker {
 	}
 	
 	
-	public static void cloudToPng(String[] words, double[] size) {
+	public static File cloudToPng(String[] words, double[] size, String fileName) {
+		File file = null;
 		JPanel panel = new JPanel();
+		panel.setSize(500,410);
 		Cloud cloud = new Cloud();
 		for (int i = 0; i < words.length; i++) {
 			for (double x = size[i]; x > 0; x--) {
@@ -153,9 +156,6 @@ public class WordCloudMaker {
 			label.setOpaque(false);
 			if (rand > -1 && rand <= 25) label.setDirection(Direction.VERTICAL_DOWN);
 			if (rand > 25 && rand <= 50) label.setDirection(Direction.VERTICAL_UP);
-
-			DecimalFormat f = new DecimalFormat("##.0000");
-
 			label.setFont(label.getFont().deriveFont((float) tag.getWeight() * 10 + 10));
 			float hue = (float) Math.random();
 			int rgb = Color.HSBtoRGB(hue, 0.9f, 0.6f);
@@ -164,15 +164,16 @@ public class WordCloudMaker {
 			label.setTransferHandler(new TransferHandler("foreground"));
 			panel.add(label);
 		}
-		
+	
 		panel.setBackground(Color.WHITE);
 
         try {
         	BufferedImage bi = ScreenImage.createImage(panel);
-        	ScreenImage.writeImage(bi, "/tmp/panel.png");
+        	file = ScreenImage.writeImage(bi, fileName);
         } catch (IOException exp) {
             exp.printStackTrace();
         }
+        return file;
         
 	}
 	

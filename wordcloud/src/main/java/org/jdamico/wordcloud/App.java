@@ -127,7 +127,7 @@ public class App {
 		// create a word cloud using words frequencies (words size using
 		// frequency values)
 		//WordCloudMaker.main(cloudKeywords, cloudKeywordFreq, "Words Frequency Word Cloud");
-		WordCloudMaker.cloudToPng(cloudKeywords, cloudKeywordFreq);
+		WordCloudMaker.cloudToPng(cloudKeywords, cloudKeywordFreq, "/tmp/test.png");
 
 		// save LLH results to CSV file
 		if (Integer.parseInt(args[4]) == 1)
